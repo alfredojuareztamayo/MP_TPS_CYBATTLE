@@ -12,14 +12,23 @@ public class PlayerMovement : MonoBehaviour
     /// speed of rhe rotation of the player
     /// </summary>
     public float rotationSpeed = 100f;
+
+    public float JumpForce = 1200;
     /// <summary>
     /// Private RigidBody of the player
     /// </summary>
     Rigidbody rb;
+
+    /// <summary>
+    /// Private animator form the player
+    /// </summary>
+    
+    Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -36,6 +45,9 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.MovePosition(rb.position + (transform.forward * Input.GetAxis("Vertical")
         + transform.right * Input.GetAxis("Horizontal")) * speed * Time.deltaTime);
+
+        animator.SetFloat("BlendV", Input.GetAxis("Vertical"));
+        animator.SetFloat("BlendH", Input.GetAxis("Horizontal"));
     }
     /// <summary>
     /// Handle player Rotation based on user Input
@@ -49,5 +61,13 @@ public class PlayerMovement : MonoBehaviour
        {
         rb.MoveRotation(rb.rotation*Quaternion.Euler(rotateY));
        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb.AddForce(Vector3.up * 1200 * Time.deltaTime, ForceMode.VelocityChange);
+        }
     }
 }
