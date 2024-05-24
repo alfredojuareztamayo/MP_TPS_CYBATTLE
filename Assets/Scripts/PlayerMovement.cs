@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     
     Animator animator;
+
+    private bool canJump = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,9 +67,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && canJump==true)
         {
-            rb.AddForce(Vector3.up * 1200 * Time.deltaTime, ForceMode.VelocityChange);
+            canJump = false;
+            rb.AddForce(Vector3.up * JumpForce * Time.deltaTime, ForceMode.VelocityChange);
+            StartCoroutine(JumpAgain());
         }
+    }
+    IEnumerator JumpAgain()
+    {
+        yield return new WaitForSeconds(1);
+        canJump = true; 
     }
 }

@@ -5,9 +5,9 @@ using UnityEngine.Animations.Rigging;
 
 public class WeaponChangeAdvance : MonoBehaviour
 {
-    public TwoBoneIKConstraint leftHand, rightHand;
+    public TwoBoneIKConstraint leftHand, rightHand, leftThumb;
     public RigBuilder rig;
-    public Transform[] leftTarget, rightTarget;
+    public Transform[] leftTarget, rightTarget, thumbTarget;
     public GameObject[] weapons;
     private int weaponNumber = 0;
     // Start is called before the first frame update
@@ -30,6 +30,7 @@ public class WeaponChangeAdvance : MonoBehaviour
             weapons[weaponNumber].SetActive(true);
             leftHand.data.target = leftTarget[weaponNumber];
             rightHand.data.target = rightTarget[weaponNumber];
+            leftThumb.data.target = thumbTarget[weaponNumber];
             rig.Build();
         }
     }
