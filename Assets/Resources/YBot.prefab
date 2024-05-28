@@ -3112,8 +3112,8 @@ GameObject:
   - component: {fileID: 6505144346717383773}
   - component: {fileID: 3140568980075516359}
   - component: {fileID: 9221795012486604306}
-  - component: {fileID: 7061410427417695119}
   - component: {fileID: 5153134547318290757}
+  - component: {fileID: 8883782365082763770}
   m_Layer: 0
   m_Name: YBot
   m_TagString: Player
@@ -3294,30 +3294,6 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
---- !u!114 &7061410427417695119
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359775429143733753}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e94126dd42652cb4e82132a4904116a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leftHand: {fileID: 8148871199539818123}
-  rightHand: {fileID: 7803824974869696203}
-  rig: {fileID: 9221795012486604306}
-  leftTargetWeapon1: {fileID: 2489100985768468687}
-  leftTargetWeapon2: {fileID: 1382615439690796566}
-  leftTargetWeapon3: {fileID: 6000405596044252831}
-  rightTargetWeapon1: {fileID: 2684922830081360404}
-  rightTargetWeapon2: {fileID: 4416708634411549742}
-  rightTargetWeapon3: {fileID: 4291358738990945386}
-  weapon1: {fileID: 4275295754853673158}
-  weapon2: {fileID: 2785391363811789708}
-  weapon3: {fileID: 2197004518510810152}
 --- !u!114 &5153134547318290757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3350,6 +3326,32 @@ MonoBehaviour:
   - {fileID: 4275295754853673158}
   - {fileID: 2785391363811789708}
   - {fileID: 2197004518510810152}
+  aimObjects:
+  - {fileID: 3908830395433549484}
+  - {fileID: 8480173489427212205}
+  - {fileID: 5799961485815832999}
+--- !u!114 &8883782365082763770
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359775429143733753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4362636351421787919
 GameObject:
   m_ObjectHideFlags: 0
