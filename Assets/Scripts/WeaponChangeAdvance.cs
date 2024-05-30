@@ -24,17 +24,21 @@ public class WeaponChangeAdvance : MonoBehaviour
     {
 
         camObject = GameObject.Find("PlayerCam");
-        aimTarget = GameObject.Find("AimRef").transform;
+        //aimTarget = GameObject.Find("AimRef").transform;
         if (this.gameObject.GetComponent<PhotonView>().IsMine == true)
         {
             cam = camObject.GetComponent<CinemachineVirtualCamera>();
             cam.Follow = this.gameObject.transform;
             cam.LookAt = this.gameObject.transform;
-            Invoke("SetLookAt", 0.1f);
+            //Invoke("SetLookAt", 0.1f);
+        }
+        else
+        {
+            this.gameObject.GetComponent<PlayerMovement>().enabled = false;
         }
     }
 
-    void SetLookAt()
+    /*void SetLookAt()
     {
         if(aimTarget!= null)
         {
@@ -46,7 +50,7 @@ public class WeaponChangeAdvance : MonoBehaviour
             }
             rig.Build();
         }
-    }
+    }*/
     // Update is called once per frame
     void Update()
     {
