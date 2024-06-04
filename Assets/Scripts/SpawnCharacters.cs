@@ -7,7 +7,11 @@ public class SpawnCharacters : MonoBehaviour
 {
     public GameObject character;
     public Transform[] spawnPoints;
-    // Start is called before the first frame update
+    public GameObject[] weapons;
+    public Transform[] weaponSpawnPoints;
+    public float weaponRespawnTime = 10;
+
+    // Start is called before the first frame update 
     void Start()
     {
         if (PhotonNetwork.IsConnected)
@@ -21,4 +25,21 @@ public class SpawnCharacters : MonoBehaviour
     {
         
     }
+
+    public void SpawnWeaponsStart()
+    {
+        for (int i = 0; i < weapons.Length; i++)
+        {
+            PhotonNetwork.Instantiate(weapons[i].name, weaponSpawnPoints[i].position, weaponSpawnPoints[i].rotation);
+
+        }
+    }
+    /*public void SpawnPlayer()
+    {
+        if (PhotonNetwork.IsConnected && PhotonNetwork.InRoom)
+        {
+            Transform spawnPoint = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber % spawnPoints.Length];
+            PhotonNetwork.Instantiate(character.name, spawnPoint.position, spawnPoint.rotation);
+        }
+    }*/
 }
