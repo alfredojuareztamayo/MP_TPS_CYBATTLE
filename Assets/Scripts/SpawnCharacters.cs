@@ -16,7 +16,7 @@ public class SpawnCharacters : MonoBehaviour
     {
         if (PhotonNetwork.IsConnected)
         {
-            PhotonNetwork.Instantiate(character.name, spawnPoints[PhotonNetwork.CountOfPlayers - 1].position, spawnPoints[PhotonNetwork.CountOfPlayers - 1].rotation);
+            StartCoroutine(SpawnCharacter());
         }
     }
 
@@ -42,4 +42,10 @@ public class SpawnCharacters : MonoBehaviour
             PhotonNetwork.Instantiate(character.name, spawnPoint.position, spawnPoint.rotation);
         }
     }*/
+    IEnumerator SpawnCharacter()
+    {
+        yield return new WaitForSeconds(1f);
+        PhotonNetwork.Instantiate(character.name, spawnPoints[PhotonNetwork.CountOfPlayers - 1].position, spawnPoints[PhotonNetwork.CountOfPlayers - 1].rotation);
+
+    }
 }

@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     public float rotationSpeed = 100f;
 
-    public float JumpForce = 1200;
+    public float JumpForce;
     /// <summary>
     /// Private RigidBody of the player
     /// </summary>

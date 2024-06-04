@@ -3297,12 +3297,12 @@ GameObject:
   - component: {fileID: 8419241182537841969}
   - component: {fileID: 7629543578173561181}
   - component: {fileID: 6505144346717383773}
-  - component: {fileID: 3140568980075516359}
   - component: {fileID: 9221795012486604306}
   - component: {fileID: 5153134547318290757}
   - component: {fileID: 8883782365082763770}
   - component: {fileID: 8406943208388933347}
   - component: {fileID: 2526544284310344690}
+  - component: {fileID: 1929745581609484509}
   m_Layer: 0
   m_Name: YBot
   m_TagString: Player
@@ -3403,21 +3403,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &3140568980075516359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4359775429143733753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f81f4359be8b7df4da576d22f640f28d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 7
-  rotationSpeed: 150
-  JumpForce: 700
 --- !u!114 &9221795012486604306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3607,6 +3592,21 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &1929745581609484509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359775429143733753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81f4359be8b7df4da576d22f640f28d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  rotationSpeed: 150
+  JumpForce: 600
 --- !u!1 &4362636351421787919
 GameObject:
   m_ObjectHideFlags: 0
