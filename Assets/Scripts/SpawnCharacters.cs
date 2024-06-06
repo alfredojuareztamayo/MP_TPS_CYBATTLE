@@ -45,7 +45,7 @@ public class SpawnCharacters : MonoBehaviour
     IEnumerator SpawnCharacter()
     {
         yield return new WaitForSeconds(1f);
-        PhotonNetwork.Instantiate(character.name, spawnPoints[PhotonNetwork.CountOfPlayers - 1].position, spawnPoints[PhotonNetwork.CountOfPlayers - 1].rotation);
+        PhotonNetwork.Instantiate(character.name, spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].position, spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation);
 
     }
 }
