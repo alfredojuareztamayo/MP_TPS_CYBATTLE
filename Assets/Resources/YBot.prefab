@@ -3303,6 +3303,7 @@ GameObject:
   - component: {fileID: 8406943208388933347}
   - component: {fileID: 2526544284310344690}
   - component: {fileID: 1929745581609484509}
+  - component: {fileID: 5132383256876498921}
   m_Layer: 0
   m_Name: YBot
   m_TagString: Player
@@ -3505,6 +3506,11 @@ MonoBehaviour:
   - {fileID: 3908830395433549484}
   - {fileID: 8480173489427212205}
   - {fileID: 5799961485815832999}
+  weaponsIcons:
+  - {fileID: 21300000, guid: 641e01174fc821642ac00cc9838b5871, type: 3}
+  - {fileID: 21300000, guid: af5b07ee6c7f6374b845eba9288fb0d3, type: 3}
+  - {fileID: 21300000, guid: 0e038a1a4218f6645bb66faf9a568a63, type: 3}
+  ammoWeapons: 0a000000320000003c000000
 --- !u!114 &8883782365082763770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3607,6 +3613,33 @@ MonoBehaviour:
   speed: 10
   rotationSpeed: 150
   JumpForce: 600
+--- !u!114 &5132383256876498921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359775429143733753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 439045bd8f8da3b4ba16164c26487f2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonNumbers: 000000000100000002000000030000000400000005000000
+  viewId: 000000000000000000000000000000000000000000000000
+  colors:
+  - serializedVersion: 2
+    rgba: 4279374516
+  - serializedVersion: 2
+    rgba: 4279341835
+  - serializedVersion: 2
+    rgba: 4279137234
+  - serializedVersion: 2
+    rgba: 4282269256
+  - serializedVersion: 2
+    rgba: 4289991293
+  - serializedVersion: 2
+    rgba: 4286449427
 --- !u!1 &4362636351421787919
 GameObject:
   m_ObjectHideFlags: 0

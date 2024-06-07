@@ -5,6 +5,7 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.Animations;
 using Cinemachine;
 using Photon.Pun;
+using UnityEngine.UI;
 
 public class WeaponChangeAdvance : MonoBehaviour
 {
@@ -22,10 +23,16 @@ public class WeaponChangeAdvance : MonoBehaviour
     private Transform aimTarget;
 
     private GameObject testForWeapons;
+
+    private Image weaponIcon;
+    private Text ammoAmount;
+    public Sprite[] weaponsIcons;
+    public int[] ammoWeapons;
     // Start is called before the first frame update
     void Start()
     {
-
+        weaponIcon = GameObject.Find("WeaponUI").GetComponent<Image>();
+        ammoAmount = GameObject.Find("AmmoAmt").GetComponent<Text>();
         camObject = GameObject.Find("PlayerCam");
         //aimTarget = GameObject.Find("AimRef").transform;
         if (this.gameObject.GetComponent<PhotonView>().IsMine == true)
@@ -68,12 +75,19 @@ public class WeaponChangeAdvance : MonoBehaviour
         {
             //weaponNumber++;
             this.GetComponent<PhotonView>().RPC("Change",RpcTarget.AllBuffered);
-            if (weaponNumber > weapons.Length - 1) weaponNumber = 0;
-            for(int i = 0; i < weapons.Length; i++)
+            if (weaponNumber > weapons.Length - 1)
+            {
+                weaponIcon.GetComponent<Image>().sprite = weaponsIcons[0];
+                ammoAmount.text = ammoWeapons[0].ToString();
+                weaponNumber = 0;
+            }
+                for(int i = 0; i < weapons.Length; i++)
             {
                 weapons[i].SetActive(false);
             }
             weapons[weaponNumber].SetActive(true);
+            weaponIcon.GetComponent<Image>().sprite = weaponsIcons[weaponNumber];
+            ammoAmount.text = ammoWeapons[weaponNumber].ToString();
             leftHand.data.target = leftTarget[weaponNumber];
             rightHand.data.target = rightTarget[weaponNumber];
             leftThumb.data.target = thumbTarget[weaponNumber];

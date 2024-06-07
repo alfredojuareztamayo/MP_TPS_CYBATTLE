@@ -44,6 +44,8 @@ MonoBehaviour:
   - TurnOn
   - Change
   - SelectColor
+  - AssignColor
+  - Count
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
