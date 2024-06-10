@@ -29,17 +29,17 @@ public class LobbyScript : MonoBehaviourPunCallbacks
 
     public void JoinGameKillCount()
     {
-        levelName = "Floor layout";
+        levelName = "KillCount";
         PhotonNetwork.JoinLobby(killCount);
     }
     public void JoinGameTeamBattle()
     {
-        levelName = "Floor layout";
+        levelName = "TeamBattle";
         PhotonNetwork.JoinLobby(teamBattle);
     }
     public void JoinGameNoRespawn()
     {
-        levelName = "Floor layout";
+        levelName = "NoRespawn";
         PhotonNetwork.JoinLobby(noRespawn);
     }
 

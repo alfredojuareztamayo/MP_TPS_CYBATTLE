@@ -28,12 +28,28 @@ public class WeaponChangeAdvance : MonoBehaviour
     private Text ammoAmount;
     public Sprite[] weaponsIcons;
     public int[] ammoWeapons;
+
+    public GameObject[] muzzelFlash;
+
+    private string shooterName;
+    private string gotShotName;
+    public float[] damageAmts;
+
+    public bool isDead = false;
+    private GameObject choosePanel;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        choosePanel = GameObject.Find("ChoosePanel");
         weaponIcon = GameObject.Find("WeaponUI").GetComponent<Image>();
         ammoAmount = GameObject.Find("AmmoAmt").GetComponent<Text>();
         camObject = GameObject.Find("PlayerCam");
+        ammoWeapons[0] = 60;
+        ammoWeapons[1] = 0;
+        ammoWeapons[2] = 0;
+        ammoAmount.text = ammoWeapons[0].ToString();
         //aimTarget = GameObject.Find("AimRef").transform;
         if (this.gameObject.GetComponent<PhotonView>().IsMine == true)
         {
@@ -50,8 +66,11 @@ public class WeaponChangeAdvance : MonoBehaviour
         testForWeapons = GameObject.Find("Weapon1Pickup(clone)");
         if(testForWeapons == null) 
         {
+            if(this.gameObject.GetComponent<PhotonView>().Owner.IsMasterClient == true)
+            {
             var Spawner = GameObject.Find("SpawnScript");
             Spawner.GetComponent<SpawnCharacters>().SpawnWeaponsStart();
+            }
         }
     }
 
@@ -71,7 +90,39 @@ public class WeaponChangeAdvance : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(1) && this.gameObject.GetComponent<PhotonView>().IsMine == true)
+
+        if(Input.GetMouseButtonDown(0) && isDead == false && choosePanel.activeInHierarchy == false)
+        {
+            if(this.gameObject.GetComponent<PhotonView>().IsMine == true && ammoWeapons[weaponNumber] > 0)
+            {
+                ammoWeapons[weaponNumber]--;
+                ammoAmount.text = ammoWeapons[weaponNumber].ToString();
+                GetComponent<DisplayColor>().PlayGunShot(GetComponent<PhotonView>().Owner.NickName, weaponNumber);
+                this.GetComponent<PhotonView>().RPC("GunMuzzleFlash", RpcTarget.All);
+
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+                if (Physics.Raycast(ray, out hit, 500))
+                {
+                    if (hit.transform.gameObject.GetComponent<PhotonView>() != null)
+                    {
+                        gotShotName = hit.transform.gameObject.GetComponent<PhotonView>().Owner.NickName;
+                        
+
+                    }
+                    if (hit.transform.gameObject.GetComponent<DisplayColor>() != null)
+                    {
+                        hit.transform.gameObject.GetComponent<DisplayColor>().DeliverDamage(this.GetComponent<PhotonView>().Owner.NickName, hit.transform.gameObject.GetComponent<PhotonView>().Owner.NickName, damageAmts[weaponNumber]);
+                    }
+                    shooterName = GetComponent<PhotonView>().Owner.NickName;
+                    Debug.Log(gotShotName + " got hit by " + shooterName);
+                }
+                this.gameObject.layer = LayerMask.NameToLayer("Default");
+
+            }
+        }
+        if(Input.GetMouseButtonDown(1) && this.gameObject.GetComponent<PhotonView>().IsMine == true && isDead == false)
         {
             //weaponNumber++;
             this.GetComponent<PhotonView>().RPC("Change",RpcTarget.AllBuffered);
@@ -94,6 +145,20 @@ public class WeaponChangeAdvance : MonoBehaviour
             rig.Build();
         }
     }
+
+    public void UpdatePickup()
+    {
+        ammoAmount.text = ammoWeapons[weaponNumber].ToString();
+    }
+
+    [PunRPC]
+    void GunMuzzleFlash()
+    {
+       
+        muzzelFlash[weaponNumber].SetActive(true);
+        StartCoroutine(MuzzleOff());
+    }
+
     [PunRPC]
     public void Change() 
     {
@@ -110,4 +175,18 @@ public class WeaponChangeAdvance : MonoBehaviour
         leftThumb.data.target = thumbTarget[weaponNumber];
         rig.Build();
     }
+
+    IEnumerator MuzzleOff()
+    {
+        yield return new WaitForSeconds(0.03f);
+        this.GetComponent<PhotonView>().RPC("MuzzleFlashOff",RpcTarget.All);
+        //muzzelFlash[weaponNumber].SetActive(false);
+    }
+
+    [PunRPC]
+    void MuzzleFlashOff()
+    {
+        muzzelFlash[weaponNumber].SetActive(false);
+    }
+
 }
