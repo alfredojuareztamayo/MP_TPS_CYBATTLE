@@ -37,15 +37,30 @@ public class WeaponChangeAdvance : MonoBehaviour
 
     public bool isDead = false;
     private GameObject choosePanel;
+    private GameObject Mazes;
 
-
+    private void Awake()
+    {
+       
+    }
     // Start is called before the first frame update
     void Start()
     {
+        /*
+        Mazes = GameObject.Find("mazeGenerator");
+        if (this.gameObject.GetComponent<PhotonView>().Owner.IsMasterClient == true)
+        {
+            Mazes.GetComponent<StackMaze>().isMaze = false;
+        }
+        else
+        {
+            Mazes.GetComponent<StackMaze>().isMaze = true;
+        }*/
         choosePanel = GameObject.Find("ChoosePanel");
         weaponIcon = GameObject.Find("WeaponUI").GetComponent<Image>();
         ammoAmount = GameObject.Find("AmmoAmt").GetComponent<Text>();
         camObject = GameObject.Find("PlayerCam");
+        
         ammoWeapons[0] = 60;
         ammoWeapons[1] = 0;
         ammoWeapons[2] = 0;
@@ -57,6 +72,7 @@ public class WeaponChangeAdvance : MonoBehaviour
             cam.Follow = this.gameObject.transform;
             cam.LookAt = this.gameObject.transform;
             //Invoke("SetLookAt", 0.1f);
+            
         }
         else
         {
@@ -68,8 +84,11 @@ public class WeaponChangeAdvance : MonoBehaviour
         {
             if(this.gameObject.GetComponent<PhotonView>().Owner.IsMasterClient == true)
             {
-            var Spawner = GameObject.Find("SpawnScript");
-            Spawner.GetComponent<SpawnCharacters>().SpawnWeaponsStart();
+                
+                   
+                    var Spawner = GameObject.Find("SpawnScript");
+                    Spawner.GetComponent<SpawnCharacters>().SpawnWeaponsStart();
+   
             }
         }
     }
@@ -189,4 +208,10 @@ public class WeaponChangeAdvance : MonoBehaviour
         muzzelFlash[weaponNumber].SetActive(false);
     }
 
+    IEnumerator weaponsSpawnerDelay()
+    {
+        yield return new WaitForSeconds(3f);
+        var Spawner = GameObject.Find("SpawnScript");
+        Spawner.GetComponent<SpawnCharacters>().SpawnWeaponsStart();
+    }
 }

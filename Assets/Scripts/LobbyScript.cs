@@ -11,6 +11,7 @@ public class LobbyScript : MonoBehaviourPunCallbacks
     TypedLobby killCount = new TypedLobby("killCount", LobbyType.Default);
     TypedLobby teamBattle = new TypedLobby("teamBattle", LobbyType.Default);
     TypedLobby noRespawn = new TypedLobby("noRespawn", LobbyType.Default);
+    TypedLobby maze = new TypedLobby("Maze", LobbyType.Default);
 
     public GameObject roomNumber;
 
@@ -36,6 +37,11 @@ public class LobbyScript : MonoBehaviourPunCallbacks
     {
         levelName = "TeamBattle";
         PhotonNetwork.JoinLobby(teamBattle);
+    }
+    public void JoinGameMazeBattle()
+    {
+        levelName = "MazeKill";
+        PhotonNetwork.JoinLobby(maze);
     }
     public void JoinGameNoRespawn()
     {

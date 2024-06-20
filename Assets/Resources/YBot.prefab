@@ -3726,6 +3726,7 @@ GameObject:
   - component: {fileID: 1929745581609484509}
   - component: {fileID: 5132383256876498921}
   - component: {fileID: 339894330102643503}
+  - component: {fileID: 2358674868727338351}
   m_Layer: 0
   m_Name: YBot
   m_TagString: Player
@@ -4052,6 +4053,7 @@ MonoBehaviour:
   JumpForce: 600
   isDead: 0
   gameOver: 0
+  noRespawn: 0
 --- !u!114 &5132383256876498921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4192,6 +4194,45 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2358674868727338351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359775429143733753}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18775041debec1e42b28db4f0ef46e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  depth: 20
+  width: 20
+  scale: 15
+  player: {fileID: 0}
+  MazeWall: {fileID: 5729609752598588215, guid: 72032637db45a1d4a80ab740bfba921c, type: 3}
+  SpawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  WeaponsPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  PickUpMagic:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  isMaze: 0
 --- !u!1 &4362636351421787919
 GameObject:
   m_ObjectHideFlags: 0

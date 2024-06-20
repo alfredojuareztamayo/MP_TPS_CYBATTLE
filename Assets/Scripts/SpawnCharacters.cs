@@ -10,13 +10,21 @@ public class SpawnCharacters : MonoBehaviour
     public GameObject[] weapons;
     public Transform[] weaponSpawnPoints;
     public float weaponRespawnTime = 10;
+    public bool isMazeSpawn = false;
 
     // Start is called before the first frame update 
     void Start()
     {
         if (PhotonNetwork.IsConnected)
         {
-            StartCoroutine(SpawnCharacter());
+            if(isMazeSpawn == false)
+            {
+                StartCoroutine(SpawnCharacter(1f));
+            }
+            else
+            {
+                StartCoroutine(SpawnCharacter(3f));
+            }
         }
     }
 
@@ -42,9 +50,9 @@ public class SpawnCharacters : MonoBehaviour
             PhotonNetwork.Instantiate(character.name, spawnPoint.position, spawnPoint.rotation);
         }
     }*/
-    IEnumerator SpawnCharacter()
+    IEnumerator SpawnCharacter(float time)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(time);
         PhotonNetwork.Instantiate(character.name, spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].position, spawnPoints[PhotonNetwork.CurrentRoom.PlayerCount - 1].rotation);
 
     }

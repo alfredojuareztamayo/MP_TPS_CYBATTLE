@@ -17,7 +17,7 @@ public class NickNameScript : MonoBehaviourPunCallbacks
     public bool noRespawn = false;
     public GameObject eliminationPanel;
 
-
+    public bool mazeGnerate = false;
     private void Start()
     {
         if (noRespawn == true)

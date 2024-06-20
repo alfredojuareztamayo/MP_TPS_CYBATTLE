@@ -21,6 +21,8 @@ public class DisplayColor : MonoBehaviourPunCallbacks
     public AudioClip[] gunShotSounds;
     private bool isRespawn = false;
 
+    private bool isMaze = false;
+
     private void Start()
     {
         namesObject = GameObject.Find("namesBG");
@@ -28,7 +30,9 @@ public class DisplayColor : MonoBehaviourPunCallbacks
         InvokeRepeating("CheckTime", 1, 1);
         teamMode = namesObject.GetComponent<NickNameScript>().teamMode;
         isRespawn = namesObject.GetComponent<NickNameScript>().noRespawn;
+        isMaze = namesObject.GetComponent<NickNameScript>().mazeGnerate;
         GetComponent<PlayerMovement>().noRespawn = isRespawn;
+        GetComponent<StackMaze>().isMaze = isMaze;
 
 
 
