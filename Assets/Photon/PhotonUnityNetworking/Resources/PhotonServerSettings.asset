@@ -55,6 +55,16 @@ MonoBehaviour:
   - MessageOff
   - ResetForReplay
   - ReceiveMazeData
+  - HealPlayer
+  - StopMovementItem
+  - DeactivateItem
+  - DeactivateItemStop
+  - TurnOnHealth
+  - ActivateItemStop
+  - ActivateInvi
+  - DeactivateInvi
+  - InvisibleTime
+  - InvisibleTimeActive
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

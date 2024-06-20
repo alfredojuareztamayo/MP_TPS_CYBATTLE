@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject respawnPanel;
 
     public bool gameOver = false;    public bool noRespawn;    private bool startChecking = false;
-    private GameObject Canvas;
+    private GameObject Canvas;    bool canMove = true;
     private void Awake()
     {
         respawnPanel = GameObject.Find("RespawnPanel");
@@ -56,8 +56,11 @@ public class PlayerMovement : MonoBehaviour
         if (isDead == false)
         {
             respawnPanel.SetActive(false);
-            MovementPlayer();
-        RotationPlayer();
+            if (canMove)
+            {
+                MovementPlayer();
+                RotationPlayer();
+            }
         }
     }
 
@@ -136,4 +139,41 @@ public class PlayerMovement : MonoBehaviour
         transform.position = startPos;
         GetComponent<DisplayColor>().Respawn(GetComponent<PhotonView>().Owner.NickName);
     }
+    [PunRPC]
+    void StopMovementItem(float time)
+    {
+        StartCoroutine(stopMovementPlayer(time));
+    }
+
+    IEnumerator stopMovementPlayer(float time)
+    {
+        canMove = false;
+        yield return new WaitForSeconds(time);
+        canMove = true;
+    }
+
+    [PunRPC]
+    void InvisibleTime(float time)
+    {
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
+        StartCoroutine(playerInvisible(time));
+    }
+
+    IEnumerator playerInvisible(float time)
+    {
+        
+        yield return new WaitForSeconds(time);
+        this.GetComponent<PhotonView>().RPC("InvisibleTimeActive", RpcTarget.AllBuffered);
+    }
+    [PunRPC]
+    void InvisibleTimeActive()
+    {
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        this.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+
+    }
+
 }
