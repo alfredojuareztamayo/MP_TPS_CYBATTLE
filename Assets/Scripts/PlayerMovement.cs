@@ -33,21 +33,30 @@ public class PlayerMovement : MonoBehaviour
 
 
     private Vector3 startPos;
-    private bool respawned = false;
+    private bool respawned = false;
+
     private GameObject respawnPanel;
 
-    public bool gameOver = false;    public bool noRespawn;    private bool startChecking = false;
-    private GameObject Canvas;    bool canMove = true;
+    public bool gameOver = false;
+    public bool noRespawn;
+
+    private bool startChecking = false;
+    private GameObject Canvas;
+    bool canMove = true;
+
     private void Awake()
     {
         respawnPanel = GameObject.Find("RespawnPanel");
         Canvas = GameObject.Find("Canvas");
-    }
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        startPos = transform.position;       // respawnPanel = GameObject.Find("RespawnPanel");
+        startPos = transform.position;
+       // respawnPanel = GameObject.Find("RespawnPanel");
+
     }
 
     // Update is called once per frame
@@ -104,7 +113,8 @@ public class PlayerMovement : MonoBehaviour
         if (isDead == true && respawned == false && gameOver == false && noRespawn == false)
         {
             respawned = true;
-            respawnPanel.SetActive(true);            respawnPanel.GetComponent<RespawnTimer>().enabled = true;
+            respawnPanel.SetActive(true);
+            respawnPanel.GetComponent<RespawnTimer>().enabled = true;
             StartCoroutine(RespawnWait());
         }
         if (isDead == true && respawned == false && gameOver == false && noRespawn == true)
@@ -124,7 +134,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Canvas.GetComponent<KillCount>().NoRespawnWinner(GetComponent<PhotonView>().Owner.NickName);
         }
-    }
+    }
+
     IEnumerator JumpAgain()
     {
         yield return new WaitForSeconds(1);
@@ -138,7 +149,8 @@ public class PlayerMovement : MonoBehaviour
         respawned = false;
         transform.position = startPos;
         GetComponent<DisplayColor>().Respawn(GetComponent<PhotonView>().Owner.NickName);
-    }
+    }
+
     [PunRPC]
     void StopMovementItem(float time)
     {
@@ -176,4 +188,10 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    [PunRPC]
+
+    void Teleport(Vector3 pos)
+    {
+        this.gameObject.transform.position = pos;
+    }
 }
